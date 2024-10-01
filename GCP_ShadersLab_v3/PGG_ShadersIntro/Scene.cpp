@@ -33,7 +33,7 @@ Scene::Scene()
 
 	
 	//_modelMatrixCube1;
-	_modelMatrixCube2 = glm::scale(glm::translate(glm::mat4(1.0f),glm::vec3(1.0f,0.0f,0.0f)),glm::vec3(0.1f,0.1f,0.1f));
+	//_modelMatrixCube2 = glm::scale(glm::translate(glm::mat4(1.0f),glm::vec3(1.0f,0.0f,0.0f)),glm::vec3(0.1f,0.1f,0.1f));
 	_modelMatrixCube3 = glm::scale(glm::translate(glm::mat4(1.0f),glm::vec3(0.0f,-1.0f,0.0f)),glm::vec3(2.0f,0.1f,2.0f));
 	
 	// Set up the viewing matrix
@@ -53,7 +53,7 @@ Scene::~Scene()
 
 void Scene::Update( float deltaTs )
 {
-
+	float test;
 
 	if (_animateCentreCube)
 	{
@@ -79,6 +79,14 @@ void Scene::Update( float deltaTs )
 
 	// Update the model matrix with the rotation of the object
 	_modelMatrixCube1 = glm::rotate( glm::mat4(1.0f), _cube1Angle, glm::vec3(0,1,0) );
+	//_modelMatrixCube2 = glm::rotate(glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f)), glm::vec3(0.1f, 0.1f, 0.1f)), _cube2Angle, glm::vec3(0, 1, 0));
+
+	//lab2
+	glm::mat4 matScale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+	glm::mat4 matTrans = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 matRot = glm::rotate(glm::mat4(1.0f), -_cube2Angle, glm::vec3(0, 1, 0));
+
+	_modelMatrixCube2 = matRot * matTrans * matScale * matRot;
 }
 
 void Scene::Draw()
