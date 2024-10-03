@@ -133,6 +133,10 @@ void Scene::Draw()
 			glUniform3f( _shaderDiffuseColLocation, 0.3f, 0.3f, 1.0f );
 				_cubeModel.Draw( );
 
+		//lighting ? 
+			glUniform3f(_shaderSpecularColLocation, _specularColour.x, _specularColour.y, _specularColour.z);
+
+
 
 	// Technically we can do this, but it makes no real sense because we must always have a valid shader program to draw geometry
 	glUseProgram( 0 );
@@ -307,4 +311,5 @@ void Scene::BuildShaders()
 	_shaderDiffuseColLocation = glGetUniformLocation( _shaderProgram, "diffuseColour" );
 	_shaderEmissiveColLocation = glGetUniformLocation( _shaderProgram, "emissiveColour" );
 	_shaderWSLightPosLocation = glGetUniformLocation( _shaderProgram, "worldSpaceLightPos" );
+	_shaderSpecularColLocation = glGetUniformLocation(_shaderProgram, "specularColour");
 }

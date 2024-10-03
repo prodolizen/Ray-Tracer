@@ -42,6 +42,8 @@ public:
 	void SetCubeAngle(float value) { _cube1Angle = value; }
 	float GetCubeAngle() { return _cube1Angle; }
 
+	void SetSpecularColour(glm::vec3 value) { _specularColour = value; }
+	glm::vec3 GetSpecularColour() { return _specularColour; }
 
 protected:
 
@@ -77,12 +79,14 @@ protected:
 
 	int _shaderDiffuseColLocation, _shaderEmissiveColLocation;
 	int _shaderWSLightPosLocation;
+	int _shaderSpecularColLocation;
 
 	// Utility functions to help us with building our shaders
 	bool CheckShaderCompiled( GLint shader );
 	void BuildShaders();
 
 	glm::vec3 _cubeDiffuseColour;
+	glm::vec3 _specularColour;
 
 	// Bools for turning animations on and off 
 	bool _animateCentreCube, _animateLight;

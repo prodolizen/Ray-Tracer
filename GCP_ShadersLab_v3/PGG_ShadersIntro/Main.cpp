@@ -349,6 +349,11 @@ int main(int argc, char *argv[])
 			ImGui::SliderFloat("Cube Angle", &cubeAngle, 0.0f, 2.0f * 3.141592653589793238462643383);
 			myScene.SetCubeAngle(cubeAngle);
 
+			// Set diffuse colour
+			glm::vec3 currentSpecularColour = myScene.GetSpecularColour();
+			ImGui::ColorEdit3("Specular Colour", &(currentSpecularColour[0]));
+			myScene.SetSpecularColour(currentSpecularColour);
+
 			// Showing how to insert text into a string and also get FPS!!
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
