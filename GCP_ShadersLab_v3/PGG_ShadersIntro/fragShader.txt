@@ -34,7 +34,7 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0)
 	return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
 }
 //lab2
-float DistributionGGX(Vec3 N, Vec3 H, float a)
+float DistributionGGX(vec3 N, vec3 H, float a)
 {
 	float a2 = a*a;
 	float NdotH = max(dot(N,H), 0.0);
@@ -73,18 +73,18 @@ void main()
 	vec3 normal = normalize( eyeSpaceNormalV );
 	vec3 eyeDir = normalize( -eyeSpaceVertPosV );
 	vec3 halfVec = normalize(eyeDir + lightDir);
-	vec3 F0 = vec3(0.04);
+	vec3 F0 = vec3(0.04,0.04,0.04);
 
 	//lab2
 	vec3 radiance = lightColour;
 	float NDF = DistributionGGX(normal, halfVec, roughness);
 	float Geom = GeometrySmith(normal, eyeDir, lightDir, roughness);
 	vec3 Fresnel = fresnelSchlick(max(dot(halfVec, eyeDir), 0.0), F0);
-	float numerator = mix(1, NDF, useSpecularDist) * mix(1, Geom, useSpecularGeom) * Fresnel;
+	vec3 numerator = mix(1.0, NDF, useSpecularDist) * mix(1.0, Geom, useSpecularGeom) * Fresnel;
 	float denominator = 4.0 * max(dot(normal, eyeDir), 0.0) * max(dot(normal, lightDir), 0.0) + 0.0001;
 
 	vec3 specular = numerator / denominator;
-	
+
 	float NdotL = max(dot(normal, lightDir), 0.0);
 	vec3 ambient = ambientColour * albedo;
 
