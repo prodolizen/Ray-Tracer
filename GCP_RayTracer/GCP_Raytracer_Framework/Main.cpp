@@ -1,14 +1,19 @@
 
 #include "GCP_GFX_Framework.h"
-
-
-
-
+#include "Camera.h"
+#include "RayTracer.h"
 
 int main(int argc, char* argv[])
 {
 	// Set window size
 	glm::ivec2 winSize(640, 480);
+
+	Camera _camera;
+	_camera.SendWinSize(winSize);
+
+	RayTracer _rayTracer;
+
+	Sphere ssss;
 
 	// This will handle rendering to screen
 	GCP_Framework _myFramework;
@@ -19,7 +24,15 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-
+	//big loop to cycle through every pixel in the screen
+	for (int x = 0; x < winSize.x; x++)
+	{
+		for (int y = 0; y < winSize.y; y++)
+		{
+			Ray _ray = _camera.GetRay(glm::vec2(x, y));
+			glm::vec3 _colour = _rayTracer.TraceRay(_ray, ssss);
+		}
+	}
 
 
 	// Preparing a position to draw a pixel
@@ -35,8 +48,6 @@ int main(int argc, char* argv[])
 
 	// Draws a single pixel
 	_myFramework.DrawPixel(pixelPosition, pixelColour);
-
-
 
 
 
