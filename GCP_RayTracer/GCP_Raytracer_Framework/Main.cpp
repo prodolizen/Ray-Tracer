@@ -6,7 +6,7 @@
 #include "Ray.h"
 
 GCP_Framework _myFramework;
-float _sphereRadius = 100;
+int _sphereRadius = 100;
 
 void createCircle(int x_centre, int y_centre, int radius)
 {
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
 
 	createCircle(winSize.x / 2, winSize.y / 2, _sphereRadius);
 
-	_sphere._radius = _sphereRadius;
+	_sphere._radius = (float)_sphereRadius;
 	_sphere._position = glm::ivec3(winSize.x / 2, winSize.y / 2, 0);
 	//big loop to cycle through every pixel in the screen
 	for (int x = 0; x < winSize.x; x++)
