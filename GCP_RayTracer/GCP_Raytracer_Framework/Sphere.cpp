@@ -41,5 +41,7 @@ Intersect Sphere::RayIntersect(Ray ray)
 
 glm::vec3 Sphere::Shade(glm::vec3 _intersection)
 {
+    glm::vec3 N = GetNormal(_intersection);
+
     return glm::vec3(1,0,0);
 }
