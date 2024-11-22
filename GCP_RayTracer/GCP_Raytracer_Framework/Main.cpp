@@ -6,7 +6,6 @@
 #include "Ray.h"
 
 GCP_Framework _myFramework;
-int _sphereRadius = 100;
 
 void createCircle(int x_centre, int y_centre, int radius)
 {
@@ -82,7 +81,8 @@ int main(int argc, char* argv[])
 	_rayTracer.lightPos = glm::vec3(0, 5, 10); //set light position in ray tracer
 	_rayTracer.lightColour = glm::vec3(1, 1, 1); //set light colour
 
-	Sphere _sphere;
+	Sphere _sphere1;
+	Sphere _sphere2;
 	
 	// This will handle rendering to screen
 	//GCP_Framework _myFramework;
@@ -108,17 +108,35 @@ int main(int argc, char* argv[])
 	// Draws a single pixel
 	_myFramework.DrawPixel(pixelPosition, pixelColour);
 
-	createCircle(winSize.x / 2, winSize.y / 2, _sphereRadius);
+	//sphere 1
+	glm::vec3 sphere1pos = glm::vec3(winSize.x / 4, winSize.y / 4, 0);
+	int _sphere1radius = 100;
 
-	_sphere._radius = (float)_sphereRadius;
-	_sphere._position = glm::ivec3(winSize.x / 2, winSize.y / 2, 0);
+	createCircle(sphere1pos.x, sphere1pos.y, _sphere1radius);
+
+	_sphere1._radius = (float)_sphere1radius;
+	_sphere1._position = sphere1pos;
+
+	//sphere 2
+	glm::vec3 sphere2pos = -glm::vec3(winSize.x / 2, winSize.y / 2, 0);
+	int _sphere2radius = 45;
+
+	createCircle(sphere2pos.x, sphere2pos.y, _sphere2radius);
+
+	_sphere2._radius = (float)_sphere2radius;
+	_sphere2._position = sphere2pos;
+
+	//add spheres to vector within ray tracer
+	_rayTracer.spheres.push_back(_sphere1);
+	_rayTracer.spheres.push_back(_sphere2);
+
 	//big loop to cycle through every pixel in the screen
 	for (int x = 0; x < winSize.x; x++)
 	{
 		for (int y = 0; y < winSize.y; y++)
 		{
 			Ray _ray = _camera.GetRay(glm::vec2(x, y));
-			glm::vec3 _colour = _rayTracer.TraceRay(_ray, _sphere);
+			glm::vec3 _colour = _rayTracer.TraceRay(_ray, _sphere1);
 			_myFramework.DrawPixel(glm::ivec2(x, y), _colour); //redraw with new colour
 		}
 	}

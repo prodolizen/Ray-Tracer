@@ -12,5 +12,6 @@ public:
 	glm::vec3 lightPos;
 	glm::vec3 lightColour; 
 	glm::vec3 TraceRay(Ray ray, Sphere sphere);
+	std::vector<Sphere> spheres;
 };
 
