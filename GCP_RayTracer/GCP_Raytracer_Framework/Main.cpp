@@ -79,6 +79,8 @@ int main(int argc, char* argv[])
 	_camera.SendWinSize(winSize);
 
 	RayTracer _rayTracer;
+	_rayTracer.lightPos = glm::vec3(0, 5, 10); //set light position in ray tracer
+	_rayTracer.lightColour = glm::vec3(1, 1, 1); //set light colour
 
 	Sphere _sphere;
 	

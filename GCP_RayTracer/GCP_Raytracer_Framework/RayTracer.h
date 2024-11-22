@@ -9,6 +9,8 @@ class RayTracer
 private:
 	Sphere _sphere;
 public:
+	glm::vec3 lightPos;
+	glm::vec3 lightColour; 
 	glm::vec3 TraceRay(Ray ray, Sphere sphere);
 };
 

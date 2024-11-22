@@ -9,7 +9,7 @@ glm::vec3 RayTracer::TraceRay(Ray ray, Sphere sphere)
 
     if (_intersection._happened)
     {
-        glm::vec3 colour = sphere.Shade(_intersection._position);
+        glm::vec3 colour = sphere.Shade(_intersection._position, lightPos, lightColour);
         return colour;
     }
     else
