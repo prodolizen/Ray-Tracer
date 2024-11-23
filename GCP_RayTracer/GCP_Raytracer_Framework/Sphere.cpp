@@ -42,6 +42,6 @@ Intersect Sphere::RayIntersect(Ray ray)
 glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour)
 {
     glm::vec3 N = glm::normalize(_intersection - _position);
-    glm::vec3 colour = glm::dot(lightPos, N) * lightColour * glm::vec3(0.1, 0, 0);
+    glm::vec3 colour = glm::dot(lightPos, N) * lightColour * _colour;
     return colour;
 }
