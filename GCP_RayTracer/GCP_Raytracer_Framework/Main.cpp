@@ -76,6 +76,8 @@ int main(int argc, char* argv[])
 
 	Camera _camera;
 	_camera.SendWinSize(winSize);
+	_camera.Init();
+	_camera._Position = glm::vec3(10, 10, 5); //temp
 
 	RayTracer _rayTracer;
 	_rayTracer.lightPos = glm::vec3(0, 5, 10); //set light position in ray tracer
