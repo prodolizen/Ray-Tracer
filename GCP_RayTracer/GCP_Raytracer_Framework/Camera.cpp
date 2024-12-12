@@ -2,11 +2,15 @@
 
 Ray Camera::GetRay(glm::ivec2 _windowPos)
 {
-
-
-
-
     Ray ray;
+
+    float xNorm = ((2 * _windowPos.x) / _windowSize.x) - 1; //convert x pixel position to -1, 1 range
+    float yNorm = 1 - ((2 * _windowPos.y) / _windowSize.y); //convert y pixel position to -1, 1 range
+    glm::vec4 normalisedCoords = glm::vec4(xNorm, yNorm, -1, 1); //create vec4
+    normalisedCoords = glm::inverse(_projMatrix) * normalisedCoords; //multiply by inversed proj matrix
+    normalisedCoords = glm::inverse(_viewMatrix) * normalisedCoords; //multiply by inversed view matrix
+
+    //ray._origin = glm::vec3(normalisedCoords.x, normalisedCoords.y, normalisedCoords.z);
 
     ray._origin = glm::vec3(_windowPos.x, _windowPos.y, 0);
     ray._direction = glm::vec3(0, 0, -1); 
