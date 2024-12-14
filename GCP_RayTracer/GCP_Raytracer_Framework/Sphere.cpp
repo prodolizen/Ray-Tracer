@@ -39,9 +39,60 @@ Intersect Sphere::RayIntersect(Ray ray)
     return _intersect; 
 }
 
-glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour)
+//glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour)
+//{
+//    glm::vec3 N = glm::normalize(_intersection - _position);
+//    glm::vec3 colour = glm::dot(lightPos, N) * lightColour * _colour;
+//    return colour;
+//}
+
+glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos)
 {
+    //surface norm at intersect
     glm::vec3 N = glm::normalize(_intersection - _position);
-    glm::vec3 colour = glm::dot(lightPos, N) * lightColour * _colour;
-    return colour;
+
+    //lamberts cosine law for calculating diffuse
+    glm::vec3 L = glm::normalize(lightPos - _intersection); // intersect to light dir
+    float NdotL = glm::max(glm::dot(N, L), 0.0f); 
+
+    glm::vec3 diffuse = NdotL * lightColour * _colour;
+
+    //calculate specular lighting (phong)
+    glm::vec3 V = glm::normalize(cameraPos - _intersection); // intersect to cam dir
+    glm::vec3 H = glm::normalize(L + V); //half vec between light anc cam 
+    float NdotH = glm::max(glm::dot(N, H), 0.0f);
+
+    float shininess = 150.0f;
+
+    //phong
+    float specularFactor = pow(NdotH, shininess);
+    glm::vec3 specular = specularFactor * lightColour;
+
+    glm::vec3 ambient = 0.1f * _colour;
+    glm::vec3 color = ambient + diffuse + specular;
+
+    return color;
 }
+
+
+
+glm::vec3 Sphere::SpecularLighting(glm::vec3 N, glm::vec3 L, glm::vec3 V, glm::vec3 F0, float roughness)
+{
+    //half vec between light and view dir
+    glm::vec3 H = glm::normalize(L + V);
+
+    float cosTheta = glm::max(glm::dot(N, H), 0.0f);
+    glm::vec3 F = _lighting.fresnelSchlick(cosTheta, F0);
+
+    float D = _lighting.DistributionGGX(N, H, roughness);
+
+    float k = roughness * roughness / 2.0f;
+    float G = _lighting.GeometrySmith(N, V, L, k);
+
+    //calculate specular using cook torrance
+    float denominator = 4.0f * glm::max(glm::dot(N, V), 0.0f) * glm::max(glm::dot(N, L), 0.0f) + 0.001f; // Small epsilon to avoid divide by zero
+    glm::vec3 specular = (F * D * G) / denominator;
+
+    return specular;
+}
+

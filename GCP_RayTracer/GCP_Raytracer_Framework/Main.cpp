@@ -77,10 +77,10 @@ int main(int argc, char* argv[])
 	Camera _camera;
 	_camera.SendWinSize(winSize);
 	_camera.Init();
-	_camera._Position = glm::vec3(10, 10, 5); //temp
+	_camera._Position = glm::vec3(300, 300, 200); //temp
 
 	RayTracer _rayTracer;
-	_rayTracer.lightPos = glm::vec3(0, 5, 10); //set light position in ray tracer
+	_rayTracer.lightPos = glm::vec3(200, 300, 6000); //set light position in ray tracer
 	_rayTracer.lightColour = glm::vec3(1, 1, 1); //set light colour
 
 	Sphere _sphere1;
@@ -140,7 +140,7 @@ int main(int argc, char* argv[])
 		for (int y = 0; y < winSize.y; y++)
 		{
 			Ray _ray = _camera.GetRay(glm::vec2(x, y));
-			glm::vec3 _colour = _rayTracer.TraceRay(_ray, _rayTracer.spheres);
+			glm::vec3 _colour = _rayTracer.TraceRay(_ray, _rayTracer.spheres, _camera._Position);
 			_myFramework.DrawPixel(glm::ivec2(x, y), _colour); //redraw with new colour
 		}
 	}
