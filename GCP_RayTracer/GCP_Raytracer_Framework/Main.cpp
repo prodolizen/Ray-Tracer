@@ -85,6 +85,7 @@ int main(int argc, char* argv[])
 
 	Sphere _sphere1;
 	Sphere _sphere2;
+	Sphere _sphere3;
 	
 	// This will handle rendering to screen
 	//GCP_Framework _myFramework;
@@ -113,26 +114,31 @@ int main(int argc, char* argv[])
 	//sphere 1
 	glm::vec3 sphere1pos = glm::vec3(3, 3, -20);
 	int _sphere1radius = 3;
-
 	createCircle(sphere1pos.x, sphere1pos.y, _sphere1radius);
-
 	_sphere1._radius = (float)_sphere1radius;
 	_sphere1._position = sphere1pos;
 	_sphere1._colour = glm::vec3(1, 0, 0);
 
 	//sphere 2
-	glm::vec3 sphere2pos = glm::vec3(0, 0, -50);
-	int _sphere2radius = 10.0f;
-
+	glm::vec3 sphere2pos = glm::vec3(-3, -3, -20);
+	int _sphere2radius = 3;
 	createCircle(sphere2pos.x, sphere2pos.y, _sphere2radius);
-
 	_sphere2._radius = (float)_sphere2radius;
 	_sphere2._position = sphere2pos;
-	_sphere2._colour = glm::vec3(0, 1, 0);
+	_sphere2._colour = glm::vec3(0, 0, 1);
+
+	//sphere 3
+	glm::vec3 sphere3pos = glm::vec3(0, 0, -50);
+	int _sphere3radius = 10;
+	createCircle(sphere3pos.x, sphere3pos.y, _sphere3radius);
+	_sphere3._radius = (float)_sphere3radius;
+	_sphere3._position = sphere3pos;
+	_sphere3._colour = glm::vec3(0, 1, 0);
 
 	//add spheres to vector within ray tracer
 	_rayTracer.spheres.push_back(_sphere1);
 	_rayTracer.spheres.push_back(_sphere2);
+	_rayTracer.spheres.push_back(_sphere3);
 
 	//big loop to cycle through every pixel in the screen
 	for (int x = 0; x < winSize.x; x++)
