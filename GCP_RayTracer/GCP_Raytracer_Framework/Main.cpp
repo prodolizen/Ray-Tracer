@@ -111,24 +111,24 @@ int main(int argc, char* argv[])
 	_myFramework.DrawPixel(pixelPosition, pixelColour);
 
 	//sphere 1
-	glm::vec3 sphere1pos = glm::vec3(400, winSize.y / 2, 0);
-	int _sphere1radius = 100;
+	glm::vec3 sphere1pos = glm::vec3(3, 3, -20);
+	int _sphere1radius = 3;
 
 	createCircle(sphere1pos.x, sphere1pos.y, _sphere1radius);
 
 	_sphere1._radius = (float)_sphere1radius;
 	_sphere1._position = sphere1pos;
-	_sphere1._colour = glm::vec3(0.1, 0, 0);
+	_sphere1._colour = glm::vec3(1, 0, 0);
 
 	//sphere 2
-	glm::vec3 sphere2pos = glm::vec3(200, winSize.y / 2, 0);
-	int _sphere2radius = 45;
+	glm::vec3 sphere2pos = glm::vec3(0, 0, -50);
+	int _sphere2radius = 10.0f;
 
 	createCircle(sphere2pos.x, sphere2pos.y, _sphere2radius);
 
 	_sphere2._radius = (float)_sphere2radius;
 	_sphere2._position = sphere2pos;
-	_sphere2._colour = glm::vec3(0, 0.1, 0);
+	_sphere2._colour = glm::vec3(0, 1, 0);
 
 	//add spheres to vector within ray tracer
 	_rayTracer.spheres.push_back(_sphere1);
