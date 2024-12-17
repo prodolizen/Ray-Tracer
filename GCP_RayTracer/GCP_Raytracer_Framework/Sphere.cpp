@@ -46,7 +46,7 @@ Intersect Sphere::RayIntersect(Ray ray)
 //    return colour;
 //}
 
-glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos)
+glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos, bool inShadow)
 {
     //surface norm at intersect
     glm::vec3 N = glm::normalize(_intersection - _position);
@@ -55,7 +55,12 @@ glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 l
     glm::vec3 L = glm::normalize(lightPos - _intersection); // intersect to light dir
     float NdotL = glm::max(glm::dot(N, L), 0.0f); 
 
-    glm::vec3 diffuse = NdotL * lightColour * _colour;
+    glm::vec3 diffuse;
+
+    if (inShadow)
+        diffuse = glm::vec3(0, 0, 0);
+    else
+        diffuse = NdotL * lightColour * _colour;
 
     //calculate specular lighting (phong)
     glm::vec3 V = glm::normalize(cameraPos - _intersection); // intersect to cam dir

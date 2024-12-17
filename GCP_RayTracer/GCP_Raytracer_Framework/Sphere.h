@@ -21,7 +21,7 @@ public:
 	float _radius;
 	Intersect RayIntersect(Ray ray);
 	//glm::vec3 Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour);
-	glm::vec3 Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos);
+	glm::vec3 Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos, bool inShadow);
 	glm::vec3 _colour; 
 };
 
