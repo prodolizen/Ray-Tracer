@@ -33,7 +33,7 @@
 
 glm::vec3 RayTracer::TraceRay(Ray ray, std::vector<Sphere> spheres, glm::vec3 _cameraPos)
 {
-    glm::vec3 pixelColour = glm::vec3(0, 0, 1); // Default color (background, no intersection)
+    glm::vec3 pixelColour = glm::vec3(0, 0, 0); // Default color (background, no intersection)
     float closestT = FLT_MAX; // Initialize with the maximum float value
     int closestSphereIndex = -1; // To store the index of the closest sphere
 
