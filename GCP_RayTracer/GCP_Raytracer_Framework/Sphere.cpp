@@ -5,7 +5,8 @@ glm::vec3 Sphere::GetNormal(glm::vec3 input)
 	return glm::normalize(input);
 }
 
-Intersect Sphere::RayIntersect(Ray ray)
+//Intersect Sphere::RayIntersect(Ray ray)
+Intersect Sphere::RayIntersect(const Ray& ray) const
 {
     Intersect _intersect;
 
@@ -46,7 +47,8 @@ Intersect Sphere::RayIntersect(Ray ray)
 //    return colour;
 //}
 
-glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos, bool inShadow)
+//glm::vec3 Sphere::Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos, bool inShadow)
+glm::vec3 Sphere::Shade(const glm::vec3& _intersection, const glm::vec3& lightPos, const glm::vec3& lightColour, const glm::vec3& cameraPos, bool inShadow) const
 {
     //surface norm at intersect
     glm::vec3 N = glm::normalize(_intersection - _position);

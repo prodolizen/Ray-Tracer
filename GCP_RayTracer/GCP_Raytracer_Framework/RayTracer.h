@@ -4,6 +4,8 @@
 #include "Ray.h"
 #include "Sphere.h"
 #include <vector>
+#include <chrono>
+
 class RayTracer
 {
 private:
@@ -11,7 +13,8 @@ private:
 public:
 	glm::vec3 lightPos;
 	glm::vec3 lightColour; 
-	glm::vec3 TraceRay(Ray ray, std::vector<Sphere> spheres, glm::vec3 _cameraPos);
+	//glm::vec3 TraceRay(Ray ray, std::vector<Sphere> spheres, glm::vec3 _cameraPos);
+	glm::vec3 TraceRay(Ray ray, const std::vector<Sphere>& spheres, glm::vec3 _cameraPos);
 	std::vector<Sphere> spheres;
 	glm::vec3 pixelColour;
 };

@@ -19,9 +19,10 @@ private:
 public:
 	glm::vec3 _position;
 	float _radius;
-	Intersect RayIntersect(Ray ray);
-	//glm::vec3 Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour);
-	glm::vec3 Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos, bool inShadow);
+	Intersect RayIntersect(const Ray& ray) const;
+	//Intersect RayIntersect(Ray ray);
+	//glm::vec3 Shade(glm::vec3 _intersection, glm::vec3 lightPos, glm::vec3 lightColour, glm::vec3 cameraPos, bool inShadow);
+	glm::vec3 Shade(const glm::vec3& _intersection, const glm::vec3& lightPos, const glm::vec3& lightColour, const glm::vec3& cameraPos, bool inShadow) const;
 	glm::vec3 _colour; 
 };
 
