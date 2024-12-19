@@ -75,6 +75,9 @@ glm::vec3 Sphere::Shade(const glm::vec3& _intersection, const glm::vec3& lightPo
     float specularFactor = pow(NdotH, shininess);
     glm::vec3 specular = specularFactor * lightColour;
 
+    // cook torrance implementation
+    //glm::vec3 specular = SpecularLighting(N, L, V, glm::vec3(1.04f, 1.04f, 1.04f), 1.0f);
+
     glm::vec3 ambient = 0.1f * _colour;
     glm::vec3 color = ambient + diffuse + specular;
 
@@ -82,8 +85,8 @@ glm::vec3 Sphere::Shade(const glm::vec3& _intersection, const glm::vec3& lightPo
 }
 
 
-
-glm::vec3 Sphere::SpecularLighting(glm::vec3 N, glm::vec3 L, glm::vec3 V, glm::vec3 F0, float roughness)
+//cook torrance implementation
+glm::vec3 Sphere::SpecularLighting(glm::vec3 N, glm::vec3 L, glm::vec3 V, glm::vec3 F0, float roughness) const
 {
     //half vec between light and view dir
     glm::vec3 H = glm::normalize(L + V);

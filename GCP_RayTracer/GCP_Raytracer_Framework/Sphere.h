@@ -13,7 +13,7 @@ class Sphere
 {
 private:
 	glm::vec3 GetNormal(glm::vec3 input);
-	glm::vec3 SpecularLighting(glm::vec3 N, glm::vec3 L, glm::vec3 V, glm::vec3 F0, float roughness);
+	glm::vec3 SpecularLighting(glm::vec3 N, glm::vec3 L, glm::vec3 V, glm::vec3 F0, float roughness) const;
 	Lighting _lighting;
 
 public:
